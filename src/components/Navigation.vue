@@ -1,7 +1,7 @@
 <template>
     <nav class="navigation">
         <div class="logo"></div>
-        <button v-for="link of links"  class="btn btn-default nav-btn left15 top5" v-on:click="navigate(link)">{{ link.name }}</button>
+        <button v-for="link of links"  class="btn btn-default nav-btn left15 top5">{{ link.name }}</button>
     </nav>
 </template>
 <style>
@@ -36,9 +36,6 @@
         methods: {
             emitClick () {
                 this.$emit('source-click')
-            },
-            navigate(link) {
-
             }
         },
         props: ['disabled']
