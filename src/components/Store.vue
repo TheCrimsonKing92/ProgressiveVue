@@ -1,17 +1,15 @@
 <template>
     <bs-default-panel title="The Store">
         <div class="row helpers" style="margin-top: -5px">
-            <div :key="helper.id" v-for="helper of store.helpers" :class="helper.class" v-tooltip="helper.tooltip" @click="tryBuy(helper.id)" class="buyable">
-                {{ helper.currentCost }}
-            </div>
+            <helper :key="helper.id" :helper="helper" v-for="helper of store.helpers" v-on:try-buy="tryBuy(helper.id, 'helper')"></helper>
         </div>
         <div class="row upgrades">
-            <div :key="upgrade.id" v-for="upgrade of store.upgrades" :class="upgrade.class" @click="tryBuy(upgrade.id)" class="buyable">
+            <div :key="upgrade.id" v-for="upgrade of store.upgrades" :class="upgrade.class" @click="tryBuy(upgrade.id, 'upgrade')" class="buyable">
                 {{ upgrade.cost }}
             </div>
         </div>
         <div class="row towers" >
-            <div :key="tower.id" v-for="tower of store.towers" :class="tower.class" @click="tryBuy(tower.id)" class="buyable">
+            <div :key="tower.id" v-for="tower of store.towers" :class="tower.class" @click="tryBuy(tower.id, 'tower')" class="buyable">
                 {{ tower.cost }}
             </div>
         </div>
@@ -62,20 +60,22 @@
 </style>
 <script>
     import BsDefaultPanel from '../components/Bs-Default-Panel'
-    import Vue from 'vue'
-    import { VTooltip } from 'v-tooltip'
-    Vue.directive('tooltip', VTooltip)
+    import Helper from '../components/Helper'
 
     export default {
         components: {
-            BsDefaultPanel
+            BsDefaultPanel,
+            Helper
         },
         data () {
             return {}
         },
         methods: {
-            tryBuy (id) {
-                this.$emit('try-buy', id)
+            tryBuy (id, type) {
+                this.$emit('try-buy', {
+                    id: id,
+                    type: type
+                })
             }
         },
         props: ['store']

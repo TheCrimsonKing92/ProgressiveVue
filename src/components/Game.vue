@@ -26,6 +26,11 @@
                     disabled: false
                 },
                 stats: {
+                    blocks: {
+                        current: 0,
+                        highest: 0,
+                        parts: 0
+                    },
                     clicks: 0,
                     score: {
                         current: 0,
@@ -53,23 +58,37 @@
 
                 this.checkHighestScore()
             },
-            buyBlock (amount, buyable) {
-                this.deductBlocks(amount)
+            buyBlock (buyable) {
+                if (!this.canAfford(buyable.currentCost, buyable.currency)) {
+                    // TODO: Emit alert
+                    return
+                }
+
+                this.deductBlocks(buyable.currentCost)
+
                 buyable.purchased = true
             },
             buyScore (buyable) {
-                if (!this.canAfford(buyable.currentCost)) {
+                if (!this.canAfford(buyable.currentCost, buyable.currency)) {
                     // TODO: Emit alert
                     return
                 }
 
                 this.deductScore(buyable.currentCost)
-                buyable.amount++
+
                 buyable.purchased = true
-                buyable.currentCost = Math.floor(buyable.cost * Math.pow(buyable.costGrowth, buyable.amount))
+
+                if (buyable.allowsMultiple) {
+                    buyable.amount++
+                    buyable.currentCost = Math.floor(buyable.cost * Math.pow(buyable.costGrowth, buyable.amount))
+                }
             },
-            canAfford (amount) {
-                return this.stats.score.current >= amount
+            canAfford (amount, currency) {
+                if (currency === 'score') {
+                    return this.stats.score.current >= amount
+                }
+
+                return this.stats.blocks.current >= amount
             },
             checkHighestScore () {
                 if (this.stats.score.current > this.stats.score.highest) {
@@ -83,8 +102,14 @@
                     this.stats.score.current = 0
                 }
             },
-            getBuyable (id) {
+            getHelper (id) {
                 return this.store.helpers.find(h => h.id === id)
+            },
+            getTower (id) {
+                return this.store.towers.find(h => h.id === id)
+            },
+            getUpgrade (id) {
+                return this.store.upgrades.find(h => h.id === id)
             },
             loadGame () {
 
@@ -93,13 +118,32 @@
                 this.stats.clicks++
                 this.addClickScore()
             },
-            onTryBuy (id) {
-                let buyable = this.getBuyable(id)
-                if (!buyable) {
-                    return
-                }
+            onTryBuy (helper) {
+                let id = helper.id
+                let type = helper.type
 
-                this.buyScore(buyable)
+                if (type === 'helper') {
+                    let buyable = this.getHelper(id)
+                    if (!buyable) {
+                        return
+                    }
+
+                    this.buyScore(buyable)
+                } else if (type === 'upgrade') {
+                    let buyable = this.getUpgrade(id)
+                    if (!buyable) {
+                        return
+                    }
+
+                    this.buyScore(buyable)
+                } else {
+                    let buyable = this.getTower(id)
+                    if (!buyable) {
+                        return
+                    }
+
+                    this.buyBlock(buyable)
+                }
             },
             saveGame () {
 

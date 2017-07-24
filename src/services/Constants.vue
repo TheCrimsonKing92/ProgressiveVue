@@ -29,7 +29,8 @@
         })
 
         return Object.assign({}, asHelper, {
-            tooltip: generateHelperTooltip(asHelper)
+            tooltip: generateHelperTooltip(asHelper),
+            type: 'helper'
         })
     }
     const idItem = (item, index) => Object.assign({}, item, { id: index })
@@ -38,14 +39,16 @@
 
         return Object.assign({}, asBuyable, {
             allowsMultiple: false,
-            currency: 'block'
+            currency: 'block',
+            type: 'tower'
         })
     }
     const upgrade = (item, index) => {
         let asBuyable = buyable(item, index)
 
         return Object.assign({}, asBuyable, {
-            allowsMultiple: false
+            allowsMultiple: false,
+            type: 'upgrade'
         })
     }
 
