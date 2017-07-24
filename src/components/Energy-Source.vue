@@ -1,29 +1,31 @@
 <template>
-    <div class="energy-source-panel panel-default">
-        <div class="energy-source" :click="emitClick"></div>
-    </div>
+    <bs-default-panel title="The Source">
+        <div :class="{ disabled: disabled }" class="energy-source" @click="emitClick"></div>
+    </bs-default-panel>
 </template>
 <style>
-    h1, h2 {
-        font-weight: normal;
+    .energy-source {
+        border-radius: 5em;
+        background-color: green;
+        height: 120px;
+        margin-left: 100px;
+        min-height: 40px;
+        min-width: 40px;
+        opacity: 1;
+        width: 120px;
     }
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
+    .disabled {
+        opacity: 0.3;
     }
 </style>
 <script>
+    import BsDefaultPanel from '../components/Bs-Default-Panel'
+
     export default {
+        components: {
+            BsDefaultPanel
+        },
         data () {
             return {}
         },

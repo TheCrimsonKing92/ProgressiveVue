@@ -1,34 +1,31 @@
 <template>
-    <div class="stats-panel panel-default">
-        <div class="stat">
-            {{ score }}
-        </div>
-    </div>
+    <bs-default-panel title="Stats">
+        <p>
+            Current Score: {{ stats.score.current }}
+        </p>
+        <p>
+            Highest Score: {{ stats.score.highest }}
+        </p>
+        <p>
+            Total Clicks: {{ stats.clicks }}
+        </p>
+    </bs-default-panel>
 </template>
 <style>
-    h1, h2 {
-        font-weight: normal;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
+    .stat {
+        height: 20px;
+        text-align: center;
     }
 </style>
 <script>
+    import BsDefaultPanel from '../components/Bs-Default-Panel'
     export default {
+        components: {
+            BsDefaultPanel
+        },
         data () {
             return {}
         },
-        props: ['score']
+        props: ['stats']
     }
 </script>

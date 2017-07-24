@@ -1,41 +1,34 @@
 <template>
     <nav class="navigation">
         <div class="logo"></div>
-        <button v-for="link of links"  class="btn btn-default nav-btn left15 top5">{{ link.name }}</button>
+        <button :key="link.id" v-for="link of links" style="float: left;"  class="btn btn-default nav-btn left15 top5" @click="navigate(link.location)">{{ link.name }}</button>
     </nav>
 </template>
 <style>
     .logo {
-        background-image: url('../assets/logo.png');
+        background-image: url('../assets/smallLogo.png');
         background-size: 45px;
         float: left;
         height: 45px;
         width: 45px;
     }
     .navigation {
-        max-height: 1%;
+        height: 45px;
+        width: 100%;
     }
 </style>
 <script>
-    const base = 'https://thecrimsonking.net'
+    import Constants from '../services/Constants'
+
     export default {
         data () {
             return {
-                links: [
-                    {
-                        name: 'Home',
-                        location: base
-                    },
-                    {
-                        name: 'About',
-                        location: base + '/about'
-                    }
-                ]
+                links: Constants.links
             }
         },
         methods: {
-            emitClick () {
-                this.$emit('source-click')
+            navigate (location) {
+                window.location.href = location
             }
         },
         props: ['disabled']

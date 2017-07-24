@@ -1,9 +1,7 @@
 <template>
-    <div id="app container">
+    <div id="app" class="container">
         <navigation></navigation>
-        <energy-source :disabled="sourceDisabled"></energy-source>
-        <stats :score="score"></stats>
-        <store></store>
+        <game></game>
     </div>
 </template>
 <style>
@@ -13,7 +11,7 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
-        margin-top: 60px;
+        margin-top: 10px;
         min-height: 200px;
         height: 100%;
     }
@@ -60,22 +58,17 @@
 </style>
 <script>
     import Vue from 'vue'
-    import EnergySource from './components/Energy-Source'
+    import Game from './components/Game'
     import Navigation from './components/Navigation'
-    import Stats from './components/Stats'
-    import Store from './components/Store'
 
     const AppComponent = Vue.extend({
         name: 'app',
         components: {
-            EnergySource,
-            Navigation,
-            Stats,
-            Store
+            Game,
+            Navigation
         },
-        data: {
-            score: 0,
-            sourceDisabled: false
+        data () {
+            return {}
         }
     })
 
