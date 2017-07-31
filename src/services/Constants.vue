@@ -160,7 +160,72 @@
             name: 'Helping Hand',
             class: 'helping-hand',
             description: '+1 AutoClicker power',
-            cost: 250
+            cost: 200
+        },
+        {
+            name: 'Click Efficiency',
+            class: 'click-efficiency',
+            description: 'Double AutoClicker and mouse power',
+            cost: 500
+        },
+        {
+            name: 'Heavier Hammers',
+            class: 'heavier-hammers',
+            description: 'Double hammer power',
+            cost: 1250
+        },
+        {
+            name: 'Helping Handsier',
+            class: 'helping-handsier',
+            description: '+4 AutoClicker and mouse power',
+            cost: 2500
+        },
+        {
+            name: 'Cybernetic Synergy',
+            class: 'cybernetic-synergy',
+            description: '+8 power per Hammer and Robot pair',
+            cost: 9000
+        },
+        {
+            name: 'Helping Handsiest',
+            class: 'helping-handsiest',
+            description: '+16 AutoClicker and mouse power',
+            cost: 11000
+        },
+        {
+            name: 'Extended Cargo',
+            class: 'extended-cargo',
+            description: '+25% Airplane power',
+            cost: 22000
+        },
+        {
+            name: 'Buddy System',
+            class: 'buddy-system',
+            description: '+100% Airplane power',
+            cost: 85000
+        },
+        {
+            name: 'Cloner Overdrive',
+            class: 'cloner-overdrive',
+            description: '+40% cloner power',
+            cost: 300000
+        },
+        /*
+        {
+            name: 'Efficient Operations'
+        },
+        */
+        {
+            name: 'The Awakening',
+            class: 'the-awakening',
+            description: 'Djinn sacrifice current power to reach full potential',
+            cost: 2500000
+        },
+        {
+            name: 'Audible Motivation',
+            class: 'audible-motivation',
+            description: '+2% Djinn power per AutoClicker. +1% AutoClicker power per Djinn',
+            cost: 5000000
         }
     ].map(upgrade)
 
@@ -170,8 +235,11 @@
         links: links,
         store: {
             helpers: helpers,
+            helperNames: helpers.map(h => h.name),
             towers: towers,
-            upgrades: upgrades
+            towerNames: towers.map(t => t.name),
+            upgrades: upgrades,
+            upgradeNames: upgrades.map(u => u.name)
         }
     }
 </script>
