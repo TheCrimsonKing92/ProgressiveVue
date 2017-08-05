@@ -1,5 +1,5 @@
 <template>
-    <bs-default-panel title="Stats">
+    <bs-default-panel title="The Stats">
         <p>
             Current Score: {{ stats.score.current }}
         </p>

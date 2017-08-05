@@ -7,12 +7,12 @@
     .energy-source {
         border-radius: 5em;
         background-color: green;
-        height: 120px;
-        margin-left: 100px;
+        height: 100%;
+        margin-left: 20%;
         min-height: 40px;
         min-width: 40px;
         opacity: 1;
-        width: 120px;
+        width: 62%;
     }
 
     .disabled {

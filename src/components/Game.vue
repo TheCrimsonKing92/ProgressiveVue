@@ -6,6 +6,9 @@
     </div>
 </template>
 <style>
+    .game {
+        height: 20%;
+    }
 </style>
 <script>
     import Constants from '../services/Constants'

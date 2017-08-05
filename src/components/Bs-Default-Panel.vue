@@ -1,17 +1,23 @@
 <template>
-    <div class="panel panel-default">
-        <div class="panel-header">
+    <div class="panel panel-default" style="height: 100%;">
+        <div style="height: 20%; margin-bottom: 5%;">
             <h4>
                 {{ title }}
             </h4>
         </div>
-        <div class="panel-body">
+        <div class="content-slot">
             <slot>
-                Default panel content from slot :O
+                Default slot content for Bs-Default-Panel
             </slot>
-        </div>        
+        </div>
     </div>
 </template>
+<style>
+    .content-slot {
+        height: 70%;
+        padding-bottom: 5%;
+    }
+</style>
 <script>
     export default {
         data () {
